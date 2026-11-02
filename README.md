@@ -136,3 +136,10 @@ docker run -d --name diary-demo -p 8090:80 my-web
 docker stop diary-demo
 docker rm diary-demo
 ```
+
+## Docker 실행 확인
+[hello-world 실행 결과](docker-practice/hello-world.txt)
+
+아래는 localhost:8090에서 웹페이지가 실행된 화면이다.
+
+![Docker 웹페이지 실행 화면](screenshots/docker-web.png)

@@ -116,3 +116,21 @@ Dockerfile로 my-web 이미지를 만들고 웹페이지를 실행했다.
 - [바인드 마운트 설정](docker-practice/bind-mount.txt)
 - [볼륨 데이터 확인](docker-practice/volume-result.txt)
 
+## 웹페이지 실행 방법
+Docker Desktop을 실행한 상태에서 터미널에 입력한다.
+
+```
+git clone https://github.com/doniryu/dev-workplace.git
+cd dev-workplace
+docker build -t my-web .
+docker run -d --name diary-demo -p 8090:80 my-web
+```
+
+브라우저에서 http://localhost:8090 으로 접속한다.
+
+실습을 마치면 아래 명령으로 중지하고 삭제한다.
+
+```
+docker stop diary-demo
+docker rm diary-demo
+```

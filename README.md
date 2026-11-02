@@ -223,3 +223,45 @@ My diary is saved
 ```
 docker volume rm volume-demo-data
 ```
+
+## 프로젝트 목표
+터미널, Linux 권한, Docker, Git/GitHub를 활용하여
+다른 사람도 따라 실행할 수 있는 개발 작업 환경을 구성한다.
+
+## 추가 실습 실행 환경
+- OS: macOS Sequoia 15.8.2
+- 컴퓨터: Intel MacBook Pro
+- 편집기: Visual Studio Code
+- 셸: zsh / Ubuntu 컨테이너 내부 bash
+- Git: 2.39.5 (Apple Git-154)
+- Docker: 29.9.2
+- Linux 실습 이미지: Ubuntu 24.04
+
+[버전 및 이미지 목록 실제 출력](docker-practice/final-check.txt)
+
+## 수행 체크리스트
+- [x] 터미널 파일·폴더 조작
+- [x] macOS 및 Linux 파일·디렉터리 권한 변경
+- [x] Docker 설치 및 동작 확인
+- [x] hello-world 및 Ubuntu 컨테이너 실행
+- [x] 컨테이너 실행·중지·재시작
+- [x] 컨테이너 목록·로그·자원 사용량 확인
+- [x] Dockerfile로 커스텀 이미지 빌드
+- [x] 포트 매핑 및 웹페이지 접속
+- [x] 바인드 마운트로 파일 변경 반영
+- [x] 컨테이너 삭제 후 볼륨 데이터 유지 확인
+- [x] Git 설정 및 GitHub 업로드
+
+## Dockerfile 구성과 목적
+- FROM nginx:alpine: 웹 서버가 포함된 베이스 이미지를 사용한다.
+- COPY: 기본 웹페이지를 직접 작성한 index.html로 교체한다.
+- EXPOSE 80: 컨테이너에서 사용하는 웹 서버 포트를 명시한다.
+- EXPOSE만으로 접속 포트가 열리지는 않으며, 실행할 때 -p로 연결한다.
+
+## 실습에서 확인한 개념
+- 이미지는 실행에 필요한 파일과 설정이고, 컨테이너는 이미지를 실행한 환경이다.
+- 8080:80은 컴퓨터의 8080 포트를 컨테이너의 80 포트와 연결한다.
+- 바인드 마운트는 컴퓨터의 파일을 컨테이너에 연결한다.
+- 이름 있는 볼륨은 컨테이너와 별도로 데이터를 유지한다.
+- Git은 변경 이력을 관리하고, GitHub는 저장소를 공유하는 서비스다.
+

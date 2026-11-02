@@ -147,3 +147,79 @@ docker rm diary-demo
 ## Git 설정 확인
 [Git 사용자 정보와 기본 브랜치 확인 결과](git-practice/config.txt)
 
+## Linux 권한 실습 재현 방법
+Mac 터미널에서 다음 명령으로 Ubuntu를 실행한다.
+
+```
+docker run --rm -it ubuntu:24.04 bash
+```
+
+Ubuntu 안에서 다음 명령을 한 줄씩 실행한다.
+
+```
+mkdir -p /practice
+cd /practice
+touch sample.txt
+chmod 755 /practice
+chmod 644 sample.txt
+ls -ld /practice sample.txt
+chmod 700 /practice
+chmod 600 sample.txt
+ls -ld /practice sample.txt
+chmod 755 /practice
+chmod 644 sample.txt
+ls -ld /practice sample.txt
+exit
+```
+
+권한 표시가 폴더는 755 → 700 → 755,
+파일은 644 → 600 → 644 순서로 바뀌는지 확인한다.
+
+## 바인드 마운트 재현 방법
+저장소 폴더에서 Docker Desktop이 실행된 상태로 진행한다.
+
+```
+docker build -t my-web .
+docker run -d --name bind-demo -p 8092:80 -v "$PWD/index.html:/usr/share/nginx/html/index.html:ro" my-web
+```
+
+1. 브라우저에서 http://localhost:8092 에 접속한다.
+2. 컴퓨터의 index.html에서 문장을 바꾸고 저장한다.
+3. 브라우저를 새로고침하여 변경된 문장이 보이는지 확인한다.
+
+컴퓨터의 파일을 컨테이너와 연결했으므로 이미지를 다시 만들지 않아도 변경이 반영된다.
+아래 명령으로 실습용 컨테이너를 정리한다.
+
+```
+docker stop bind-demo
+docker rm bind-demo
+```
+
+주의: 위 명령은 macOS의 zsh/bash 기준이다.
+포트 8092를 다른 프로그램이 사용 중이면 다른 번호로 바꾼다.
+
+## 볼륨 데이터 유지 확인 방법
+Docker Desktop이 실행된 상태에서 진행한다.
+
+```
+docker volume create volume-demo-data
+docker run --name volume-write-demo -v volume-demo-data:/data alpine sh -c 'echo "My diary is saved" > /data/diary.txt'
+docker rm volume-write-demo
+docker run --rm -v volume-demo-data:/data alpine cat /data/diary.txt
+```
+
+마지막 명령에서 다음 문장이 출력되는지 확인한다.
+
+```
+My diary is saved
+```
+
+데이터가 컨테이너 밖의 이름 있는 볼륨에 저장되므로,
+처음 만든 컨테이너를 삭제해도 새 컨테이너에서 읽을 수 있다.
+
+확인이 끝나면 아래 명령으로 실습용 볼륨을 삭제한다.
+이 명령은 볼륨에 저장된 데이터도 삭제한다.
+
+```
+docker volume rm volume-demo-data
+```

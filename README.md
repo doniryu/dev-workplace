@@ -17,3 +17,6 @@ Git 설정을 완료하고 실습 명령어 기록을 GitHub에 올렸다
 파일과 폴더를 만들고, 복사하고, 이름을 바꾸고, 이동하고, 삭제하는 연습을 했다.
 
 [입력한 명령어 기록 보기](history.txt)
+
+## Git 상태 확인 화면
+![Git 상태 확인 결과](screenshots/git-status.png)

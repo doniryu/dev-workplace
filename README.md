@@ -77,3 +77,15 @@ hello.txt에 저장한 Hello가 출력되는 것을 확인했다.
 Get-ChildItem -Force를 실행하여 숨김 폴더인 .git까지 확인했다.
 
 ![파일과 폴더 목록](screenshots/folder-list.png)
+
+## macOS 권한 연습
+연습용 폴더와 파일에 chmod를 적용하고 변경 전후를 확인했다.
+
+- r: 읽기, w: 쓰기, x: 실행(폴더에서는 접근)
+- 폴더: 755 → 700 → 755
+- 파일: 644 → 600 → 644
+- 700·600은 소유자만 접근하도록 제한한 설정이다.
+- 이번 연습은 macOS에서 진행했으며, Linux에서도 추가 확인할 예정이다.
+
+[권한 변경 결과](permission-practice/permissions-log.txt)
+

@@ -1,0 +1,6 @@
+drwxr-xr-x 2 root root 4096 Nov  2 16:32 /practice
+-rw-r--r-- 1 root root    0 Nov  2 16:31 sample.txt
+drwx------ 2 root root 4096 Nov  2 16:32 /practice
+-rw------- 1 root root    0 Nov  2 16:31 sample.txt
+drwxr-xr-x 2 root root 4096 Nov  2 16:32 /practice
+-rw-r--r-- 1 root root    0 Nov  2 16:31 sample.txt

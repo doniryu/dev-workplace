@@ -34,3 +34,36 @@ Git 설정을 완료하고 실습 명령어 기록을 GitHub에 올렸다
 - 확인한 내용: 설치 안내에 해당 기능을 켜려면 관리자 권한이 필요하다고 표시됐다.
 - 진행 상황: 담당자에게 문의했으며, 서버 문제도 있다는 안내를 받았다. 아직 설치는 완료하지 못했다. 
 - 다음 계획: 설치 가능한 환경이 준비되면 Docker 실습을 진행한다.
+
+## 터미널 실습 따라 하기
+Windows PowerShell에서 아래 명령어를 한 줄씩 입력한다.
+실습할 위치에 practice 폴더가 없다면 다음 명령어로 만들고 들어간다.
+
+    mkdir practice
+    cd practice
+
+파일을 만들고 내용을 저장한 뒤 확인한다.
+
+    New-Item -Name hello.txt -ItemType File
+    Set-Content hello.txt "Hello"
+    Get-Content hello.txt
+
+마지막 명령어를 실행하면 Hello가 표시된다.
+
+파일을 복사하고 이름을 바꾼 뒤 폴더로 이동한다.
+
+    Copy-Item hello.txt copy.txt
+    Rename-Item copy.txt renamed.txt
+    mkdir archive
+    Move-Item renamed.txt archive
+    Get-ChildItem archive
+
+archive 폴더 안에 renamed.txt가 표시된다.
+
+이동한 파일을 삭제한 다음 빈 폴더를 삭제한다.
+
+    Remove-Item archive/renamed.txt
+    Remove-Item archive
+    Get-ChildItem
+
+이 순서대로 실습했다면 practice 폴더에는 hello.txt만 남는다.

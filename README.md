@@ -72,3 +72,8 @@ archive 폴더 안에 renamed.txt가 표시된다.
 hello.txt에 저장한 Hello가 출력되는 것을 확인했다.
 
 ![파일 내용 확인 경과](screenshots/hello-output.png)
+
+## 숨김 항목을 포함한 목록 확인
+Get-ChildItem -Force를 실행하여 숨김 폴더인 .git까지 확인했다.
+
+![파일과 폴더 목록](screenshots/folder-list.png)

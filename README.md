@@ -89,3 +89,30 @@ Get-ChildItem -Force를 실행하여 숨김 폴더인 .git까지 확인했다.
 
 [권한 변경 결과](permission-practice/permissions-log.txt)
 
+## Linux 권한 실습
+Docker의 Ubuntu 24.04 안에서 파일과 폴더의 권한을 변경했다.
+
+- 폴더: 755 → 700 → 755
+- 파일: 644 → 600 → 644
+- 변경 전, 제한한 상태, 복원한 상태를 기록했다.
+
+[Linux 권한 변경 결과](linux-practice/permissions-log.txt)
+
+## Docker 실습 결과
+Dockerfile로 my-web 이미지를 만들고 웹페이지를 실행했다.
+
+- 8080번과 8081번 포트에서 각각 웹페이지 접속을 확인했다.
+- logs로 실행 기록, stats로 CPU와 메모리 사용량을 확인했다.
+- 컨테이너를 중지한 뒤 다시 시작했다.
+- 8082번에서는 바인드 마운트로 index.html 수정 내용이 반영되는 것을 확인했다.
+- diary-data 볼륨에 저장한 문장이 컨테이너 삭제 후에도 남는 것을 확인했다.
+
+### 실행 기록
+- [Docker 버전](docker-practice/version.txt)
+- [Docker 환경 정보](docker-practice/info.txt)
+- [컨테이너 목록](docker-practice/containers.txt)
+- [웹 서버 로그](docker-practice/web-logs.txt)
+- [자원 사용량](docker-practice/stats.txt)
+- [바인드 마운트 설정](docker-practice/bind-mount.txt)
+- [볼륨 데이터 확인](docker-practice/volume-result.txt)
+

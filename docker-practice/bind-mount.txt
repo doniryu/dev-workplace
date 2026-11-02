@@ -1,0 +1,1 @@
+[{"Type":"bind","Source":"/Users/doniryu/dev-workplace/index.html","Destination":"/usr/share/nginx/html/index.html","Mode":"ro","RW":false,"Propagation":"rprivate"}]

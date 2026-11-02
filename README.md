@@ -11,7 +11,9 @@ Git 설정을 완료하고 실습 명령어 기록을 GitHub에 올렸다
 - 편집기: Visual Studio Code
 - 터미널: Windows PowerShell
 - Git 버전: 2.56.0.windows.4
-- Docker: 설치 및 실습 대기 중
+- 추가 실습 환경: macOS Sequoia 15.8.2, Intel MacBook Pro
+- Docker Desktop 설치 및 hello-world 실행 완료
+- Docker 컨테이너에서 Ubuntu 24.04 권한 실습 완료
 
 ## 터미널 실습 기록
 파일과 폴더를 만들고, 복사하고, 이름을 바꾸고, 이동하고, 삭제하는 연습을 했다.

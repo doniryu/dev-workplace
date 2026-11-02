@@ -1,0 +1,6 @@
+CONTAINER ID   IMAGE          COMMAND                   CREATED          STATUS                      PORTS                                     NAMES
+6ec70e6e58d2   ubuntu:24.04   "bash"                    5 minutes ago    Exited (0) 3 minutes ago                                              ubuntu-practice
+dc61e9ffc1ee   my-web         "/docker-entrypoint.…"   13 minutes ago   Up 13 minutes               0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   my-web-live
+780aaf795ec3   my-web         "/docker-entrypoint.…"   14 minutes ago   Up 14 minutes               0.0.0.0:8081->80/tcp, [::]:8081->80/tcp   my-web-8081
+364aa254691b   my-web         "/docker-entrypoint.…"   19 minutes ago   Up 15 minutes               0.0.0.0:8080->80/tcp, [::]:8080->80/tcp   my-web
+f6aecc45f5de   hello-world    "/hello"                  21 minutes ago   Exited (0) 21 minutes ago                                             adoring_merkle

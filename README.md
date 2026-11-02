@@ -144,4 +144,6 @@ docker rm diary-demo
 
 ![Docker 웹페이지 실행 화면](screenshots/docker-web.png)
 
+## Git 설정 확인
+[Git 사용자 정보와 기본 브랜치 확인 결과](git-practice/config.txt)
 

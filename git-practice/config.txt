@@ -1,0 +1,3 @@
+init.defaultbranch=main
+user.name=doniryu
+user.email=351375236+doniryu@users.noreply.github.com

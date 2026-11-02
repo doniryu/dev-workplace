@@ -67,3 +67,8 @@ archive 폴더 안에 renamed.txt가 표시된다.
     Get-ChildItem
 
 이 순서대로 실습했다면 practice 폴더에는 hello.txt만 남는다.
+
+## 파일 내용 확인 화면
+hello.txt에 저장한 Hello가 출력되는 것을 확인했다.
+
+![파일 내용 확인 경과](screenshots/hello-output.png)

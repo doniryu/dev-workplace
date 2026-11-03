@@ -266,3 +266,97 @@ docker volume rm volume-demo-data
 - 이름 있는 볼륨은 컨테이너와 별도로 데이터를 유지한다.
 - Git은 변경 이력을 관리하고, GitHub는 저장소를 공유하는 서비스다.
 
+## GitHub 원격 저장소 연결
+제출 저장소: https://github.com/doniryu/dev-workplace
+사용 브랜치: main
+
+git remote -v로 내려받기(fetch)와 업로드(push)에 사용하는
+원격 저장소 주소를 확인한다.
+
+[원격 저장소 설정 실제 기록](git-practice/remote.txt)
+
+## 포트 매핑과 네트워크 격리
+컨테이너는 일반적으로 호스트와 분리된 네트워크 공간
+(네트워크 네임스페이스)을 사용한다.
+따라서 컨테이너의 80번 포트와 컴퓨터의 80번 포트는 서로 다르다.
+
+-p 8080:80은 컴퓨터의 8080번 포트로 들어온 요청을
+컨테이너의 80번 포트로 전달한다.
+EXPOSE 80은 사용하는 포트를 명시하는 정보이며,
+그 자체로 호스트에 포트를 공개하지 않는다.
+
+## 절대 경로와 상대 경로
+- 절대 경로: 현재 위치와 관계없이 파일 위치를 지정한다.
+  예: /usr/share/nginx/html/index.html
+- 상대 경로: 현재 작업 폴더를 기준으로 지정한다.
+  예: index.html, docker-practice/version.txt
+- 저장소 안의 문서 링크는 다른 컴퓨터에서도 사용할 수 있도록 상대 경로를 쓴다.
+- 바인드 마운트에서는 호스트 파일의 위치를 명확히 하려고 절대 경로를 사용한다.
+  macOS의 "$PWD/index.html"은 현재 폴더의 절대 경로를 이용한다.
+
+## 권한 숫자를 읽는 규칙
+권한은 소유자, 그룹, 기타 사용자 순서로 세 자리 숫자를 쓴다.
+각 자리에서 r=4, w=2, x=1을 더한다.
+
+- 7 = 4+2+1 = rwx
+- 6 = 4+2 = rw-
+- 5 = 4+1 = r-x
+- 4 = r--
+
+따라서 755는 rwxr-xr-x이고, 644는 rw-r--r--이다.
+디렉터리의 r은 목록 읽기, w는 항목 생성·삭제,
+x는 경로 통과와 내부 항목 접근에 관련된다.
+
+## 포트 충돌 진단과 해결 절차
+아래는 충돌이 발생했을 때 사용할 진단 절차이다.
+
+### Windows PowerShell
+8080번 포트를 사용하는 항목과 PID를 확인한다.
+
+```
+netstat -ano | findstr :8080
+```
+
+출력의 마지막 숫자가 PID이다. 해당 PID를 다음 명령의
+1234 자리에 넣어 프로그램을 확인한다.
+
+```
+Get-Process -Id 1234
+```
+
+### macOS
+8080번 포트에서 접속을 기다리는 프로세스를 확인한다.
+
+```
+lsof -nP -iTCP:8080 -sTCP:LISTEN
+```
+
+### 해결 방법
+먼저 docker ps로 실행 중인 컨테이너의 포트도 확인한다.
+내 실습용 컨테이너가 점유하고 있고 더 필요 없다면
+docker stop 컨테이너이름으로 중지한다.
+다른 프로그램이 사용 중이면 해당 프로그램의 용도를 확인하고,
+실습에서는 호스트 포트를 다른 번호로 바꿀 수 있다.
+
+예를 들어 Docker 실행이 가능한 환경에서는 다음처럼
+8093번 포트로 실행한다.
+
+```
+docker run -d --name port-demo-8093 -p 8093:80 my-web
+```
+
+브라우저에서 http://localhost:8093 으로 접속한다.
+
+## 저장소 파일과 폴더 역할
+- Dockerfile: Nginx 기반 이미지에 직접 작성한 웹페이지를 넣는 빌드 설정
+- index.html: 웹 서버가 제공하는 페이지
+- history.txt: Windows 터미널 실습 명령 기록
+- permission-practice/: macOS 권한 실습 파일과 결과
+- linux-practice/: Ubuntu 권한 변경 결과
+- docker-practice/: Docker 버전·환경·컨테이너·로그·볼륨 확인 결과
+- git-practice/: Git 사용자 설정과 원격 저장소 확인 결과
+- screenshots/: 실행 화면 증거
+
+[이미지 목록과 버전 실제 출력](docker-practice/final-check.txt)
+[컨테이너 목록 실제 출력](docker-practice/containers.txt)
+

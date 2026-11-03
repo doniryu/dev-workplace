@@ -408,4 +408,45 @@ COPY 방식은 웹페이지를 이미지에 포함하여 전달하기 편리하�
   컨테이너의 주 프로세스에 연결한다.
   Ctrl+P를 누른 뒤 Ctrl+Q를 누르면 프로세스를 종료하지 않고 연결에서 빠져나올 수 있다.
   
-  
+  ## Docker 이미지 빌드 실행 기록
+아래는 macOS에서 실제 실행하고 촬영한 터미널 화면에서
+확인되는 명령과 출력 일부를 옮긴 것이다.
+전체 원본 로그는 아니며, 진행 표시·해시·소요 시간은 생략했다.
+
+실행 명령:
+
+```
+cd ~/dev-workplace
+docker build -t my-web .
+```
+
+빌드 화면에서 확인한 출력 발췌:
+
+```
+COPY index.html /usr/share/nginx/html/index.html
+exporting to image
+exporting layers
+naming to docker.io/library/my-web:latest
+unpacking to docker.io/library/my-web:latest
+```
+
+HTML 파일 복사와 이미지 내보내기가 진행됐고,
+my-web:latest 이름으로 이미지가 생성됐다.
+이후 docker images 출력에서도 해당 이미지가 확인된다.
+
+[생성된 이미지 목록 실제 출력](docker-practice/final-check.txt)
+
+### 빌드 중 Git 정보 경고
+빌드 화면에 다음 경고도 표시됐다.
+
+```
+WARNING: current commit information was not captured by the build: failed to read current
+commit information with git rev-parse --is-inside-work-tree
+```
+
+이 경고는 빌드에 현재 Git 커밋 정보를 첨부하지 못했다는 뜻이다.
+정확한 원인은 확인하지 못했다.
+이미지 생성 이후 컨테이너 실행과 웹페이지 응답은 확인했다.
+
+[웹 서버 실제 응답 로그](docker-practice/web-logs.txt)
+

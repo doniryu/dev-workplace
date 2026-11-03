@@ -360,3 +360,52 @@ docker run -d --name port-demo-8093 -p 8093:80 my-web
 [이미지 목록과 버전 실제 출력](docker-practice/final-check.txt)
 [컨테이너 목록 실제 출력](docker-practice/containers.txt)
 
+## 이미지 빌드와 변경 반영 흐름
+Dockerfile은 nginx:alpine을 기반으로 index.html을 이미지 안에 복사한다.
+따라서 컴퓨터의 HTML만 수정해도 기존 이미지와 컨테이너가 자동으로 바뀌지는 않는다.
+
+COPY 방식의 변경 반영 절차는 다음과 같다.
+1. index.html 수정 및 저장
+2. docker build -t my-web . 실행
+3. 새 이미지로 새 컨테이너 생성
+4. 브라우저에서 변경 내용 확인
+
+바인드 마운트 방식은 호스트 파일을 직접 연결하므로
+HTML을 저장하고 브라우저를 새로고침하면 변경을 확인할 수 있다.
+바인드 마운트는 개발 중 파일 편집에 편리하고,
+COPY 방식은 웹페이지를 이미지에 포함하여 전달하기 편리하다.
+
+## 저장된 실제 결과 해설
+아래 내용은 저장소의 실제 출력 파일을 확인하여 정리했다.
+
+- docker-practice/final-check.txt:
+  docker images 결과에 my-web:latest 이미지가 존재한다.
+  이미지 존재 증거이며 빌드 과정 로그를 대신하지는 않는다.
+- docker-practice/info.txt:
+  Server 정보가 출력되어 Docker 데몬과 통신했음을 확인할 수 있다.
+- docker-practice/containers.txt:
+  my-web은 8080:80, my-web-8081은 8081:80,
+  my-web-live는 8082:80으로 실행된 기록이 있다.
+  ubuntu-practice는 bash 실행 후 Exited (0) 상태로 기록돼 있다.
+- docker-practice/web-logs.txt:
+  GET / 요청에 HTTP 200으로 응답한 실제 기록이 있다.
+- docker-practice/bind-mount.txt:
+  호스트의 index.html이 컨테이너의
+  /usr/share/nginx/html/index.html에 읽기 전용으로 연결돼 있다.
+- docker-practice/volume-result.txt:
+  새 컨테이너에서 읽은 My diary is saved 문장이 저장돼 있다.
+
+## 컨테이너 종료와 접속 방식의 차이
+다음은 명령의 동작 원리를 정리한 내용이며,
+별도 비교 실습의 실제 출력 기록은 아직 첨부하지 않았다.
+
+- docker run -it ubuntu:24.04 bash:
+  bash가 컨테이너의 주 프로세스이므로 exit로 bash를 끝내면 컨테이너도 종료된다.
+- docker exec -it 컨테이너이름 bash:
+  실행 중인 컨테이너에 추가 bash를 실행한다.
+  이 bash에서 exit해도 기존 주 프로세스가 계속 실행 중이면 컨테이너는 유지된다.
+- docker attach:
+  컨테이너의 주 프로세스에 연결한다.
+  Ctrl+P를 누른 뒤 Ctrl+Q를 누르면 프로세스를 종료하지 않고 연결에서 빠져나올 수 있다.
+  
+  
